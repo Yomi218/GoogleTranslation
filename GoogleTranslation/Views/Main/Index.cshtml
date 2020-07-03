@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/jquery-1.7.1.js"></script>
+
+<br />
+<div>
+    <div style="float:left">
+        请输入需要翻译的内容：<input id="from" onchange="translete()" type="text" />
+    </div>
+    <div style="float:left">
+        <input type="button" onclick="translete()" value="=>" />
+    </div>
+    <div style="float:left">
+        <input id="to" type="text" value="" />
+        <input id="format" type="text" value="" />
+    </div>
+</div>
+
+<script type="text/javascript">
+    function translete() {
+        var form = $("#from").val()
+        $.ajax({
+            url: "/Main/GetTranslete?chinese=" + form,
+            type: "post",
+            data: {},
+            success: function (data) {
+                $("#to").val(data.Original);
+                $("#format").val(data.Formate);
+            }
+        });
+    }
+</script>
